@@ -66,7 +66,7 @@ export default function Home() {
             <a href="#negocios">Negócios</a>
             <a href="#faq">FAQ</a>
           </nav>
-          <a className="cta-pill" href="#orcamento">
+          <a className="cta-pill" href="https://wa.me/554896356844" target="_blank" rel="noopener noreferrer">
             Orçamento
           </a>
         </header>
@@ -88,7 +88,7 @@ export default function Home() {
                 obrigatória.
               </p>
               <div className="hero-actions">
-                <a className="btn-primary" href="#orcamento">
+                <a className="btn-primary" href="https://wa.me/554896356844" target="_blank" rel="noopener noreferrer">
                   Quero um orçamento grátis
                 </a>
                 <a className="btn-ghost" href="#funciona">
@@ -250,7 +250,7 @@ export default function Home() {
               </li>
             </ol>
             <div className="process-cta">
-              <a className="btn-primary" href="#orcamento">
+              <a className="btn-primary" href="https://wa.me/554896356844" target="_blank" rel="noopener noreferrer">
                 Começar agora
               </a>
             </div>
@@ -283,7 +283,7 @@ export default function Home() {
               Pronto para sair do <em>amadorismo?</em>
             </h2>
             <p>Fale com a Priz no WhatsApp e receba seu orçamento gratuito.</p>
-            <a className="btn-primary lg" href="#">
+            <a className="btn-primary lg" href="https://wa.me/554896356844" target="_blank" rel="noopener noreferrer">
               Quero meu site agora
             </a>
           </section>
