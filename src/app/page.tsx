@@ -1,6 +1,8 @@
 import Image from "next/image";
 import RevealObserver from "./reveal-observer";
 
+{
+  /*
 const mocks = [
   { t: "Clínica Mier", sub: "Odontologia", c1: "#e7e2d5", c2: "#bca878" },
   { t: "Studio Aura", sub: "Estética", c1: "#f3d9d2", c2: "#c98276" },
@@ -11,6 +13,8 @@ const mocks = [
   { t: "Studio Aura", sub: "Estética", c1: "#f3d9d2", c2: "#c98276" },
   { t: "Café Mosaico", sub: "Bistrô", c1: "#1c1410", c2: "#c97b3a" },
 ];
+*/
+}
 
 const businesses = [
   ["Clínicas", "Odonto, estética, saúde"],
@@ -66,7 +70,12 @@ export default function Home() {
             <a href="#negocios">Negócios</a>
             <a href="#faq">FAQ</a>
           </nav>
-          <a className="cta-pill" href="https://wa.me/554896356844" target="_blank" rel="noopener noreferrer">
+          <a
+            className="cta-pill"
+            href="https://wa.me/554896356844"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Orçamento
           </a>
         </header>
@@ -75,7 +84,7 @@ export default function Home() {
           {/* HERO */}
           <section className="hero">
             <div className="hero-inner" data-reveal>
-              <div className="badge">⌁ Estúdio de Web Design · Est. 2026</div>
+              <div className="badge">✦ Estúdio de Web Design · Est. 2026</div>
               <h1>
                 Sites elegantes,
                 <br />
@@ -88,7 +97,12 @@ export default function Home() {
                 obrigatória.
               </p>
               <div className="hero-actions">
-                <a className="btn-primary" href="https://wa.me/554896356844" target="_blank" rel="noopener noreferrer">
+                <a
+                  className="btn-primary"
+                  href="https://wa.me/554896356844"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Quero um orçamento grátis
                 </a>
                 <a className="btn-ghost" href="#funciona">
@@ -97,7 +111,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* tilted showcase rail */}
+            {/* tilted showcase rail 
             <div className="rail-wrap" aria-hidden>
               <div className="rail" id="rail">
                 {mocks.map((m, i) => (
@@ -123,7 +137,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             <div className="hero-meta" data-reveal>
               <div>
@@ -250,7 +264,12 @@ export default function Home() {
               </li>
             </ol>
             <div className="process-cta">
-              <a className="btn-primary" href="https://wa.me/554896356844" target="_blank" rel="noopener noreferrer">
+              <a
+                className="btn-primary"
+                href="https://wa.me/554896356844"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Começar agora
               </a>
             </div>
@@ -283,7 +302,12 @@ export default function Home() {
               Pronto para sair do <em>amadorismo?</em>
             </h2>
             <p>Fale com a Priz no WhatsApp e receba seu orçamento gratuito.</p>
-            <a className="btn-primary lg" href="https://wa.me/554896356844" target="_blank" rel="noopener noreferrer">
+            <a
+              className="btn-primary lg"
+              href="https://wa.me/554896356844"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Quero meu site agora
             </a>
           </section>

@@ -38,7 +38,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={`${cormorant.variable} ${inter.variable}`}>{children}</body>
+<body
+        suppressHydrationWarning
+        className={`${cormorant.variable} ${inter.variable}`}
+        
+      >
+        {children}
+      </body>
     </html>
   );
 }
