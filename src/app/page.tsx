@@ -52,17 +52,17 @@ const solutions = [
 const projects = [
   {
     name: "Caco Antiguidades",
-    kind: "Antiguidades & Restauração",
+    kind: "Loja de Antiguidades",
     url: "https://cacoantiguidades.vercel.app/",
     cleanUrl: "cacoantiguidades.vercel.app",
-    description: "Catálogo online de móveis de época, restauração e peças históricas com contato direto pelo WhatsApp.",
+    description: "Catálogo online de antiguidades com contato direto pelo WhatsApp.",
   },
   {
     name: "Hard Reset Systems",
-    kind: "Tecnologia & Infraestrutura",
+    kind: "Manutenção de Computadores",
     url: "https://hardresetsystems.vercel.app/",
     cleanUrl: "hardresetsystems.vercel.app",
-    description: "Site institucional para empresa de infraestrutura de TI, redes e manutenção de servidores.",
+    description: "Site institucional para empresa de Manutenção de Computadores.",
   },
 ];
 
@@ -1163,7 +1163,7 @@ export default function Home() {
           </div>
           <div>
             <b>Falar com a Priz</b>
-            <Link href="/contato">Página de Contatos (Linktree) ↗</Link>
+            <Link href="/contato">Página de Contatos ↗</Link>
             <a href={whatsapp} target="_blank" rel="noreferrer">
               WhatsApp ↗
             </a>

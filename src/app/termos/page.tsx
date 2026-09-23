@@ -204,7 +204,7 @@ export default function TermosPage() {
           </div>
           <div>
             <b>Falar com a Priz</b>
-            <Link href="/contato">Página de Contatos (Linktree) ↗</Link>
+            <Link href="/contato">Página de Contatos ↗</Link>
             <a href={whatsapp} target="_blank" rel="noreferrer">
               WhatsApp ↗
             </a>
