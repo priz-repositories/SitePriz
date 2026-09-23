@@ -1,54 +1,62 @@
 "use client";
-
 import { useEffect } from "react";
 
 export default function RevealObserver() {
   useEffect(() => {
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    // respect reduced-motion
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-in");
-            io.unobserve(e.target);
-          }
-        }
-      },
-      { threshold: 0.15 }
-    );
+    // --- simple reveals ---
+    const reveals = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    if (reduced) {
+      reveals.forEach((el) => el.classList.add("is-in"));
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-in");
+              observer.unobserve(entry.target);
+            }
+          }),
+        { threshold: 0.12 }
+      );
+      reveals.forEach((el) => observer.observe(el));
 
-    document
-      .querySelectorAll<HTMLElement>("[data-reveal]")
-      .forEach((el) => io.observe(el));
-
-    if (reduceMotion) {
+      // --- stagger reveals ---
+      const staggerObserver = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-in");
+              staggerObserver.unobserve(entry.target);
+            }
+          }),
+        { threshold: 0.08 }
+      );
       document
-        .querySelectorAll<HTMLElement>("[data-reveal]")
-        .forEach((el) => el.classList.add("is-in"));
-      return () => io.disconnect();
+        .querySelectorAll<HTMLElement>("[data-reveal-stagger]")
+        .forEach((el) => staggerObserver.observe(el));
+
+      // --- process step highlights (scroll-driven) ---
+      const stepObserver = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("is-in");
+            else entry.target.classList.remove("is-in");
+          }),
+        { threshold: 0.5 }
+      );
+      document
+        .querySelectorAll<HTMLElement>("[data-step]")
+        .forEach((el) => stepObserver.observe(el));
+
+      return () => {
+        observer.disconnect();
+        staggerObserver.disconnect();
+        stepObserver.disconnect();
+      };
     }
-
-    let ticking = false;
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const y = window.scrollY;
-        const rail = document.getElementById("rail");
-        if (rail) rail.style.transform = `translate3d(${-y * 0.35}px, 0, 0)`;
-        ticking = false;
-      });
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      io.disconnect();
-      window.removeEventListener("scroll", onScroll);
-    };
   }, []);
-
   return null;
 }

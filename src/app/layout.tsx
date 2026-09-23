@@ -1,29 +1,20 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-cormorant",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-inter",
-  display: "swap",
-});
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
-  title: "Priz — Sites elegantes para pequenos negócios",
+  title: "Priz: Soluções digitais claras",
   description:
-    "Estúdio de Web Design e Estratégia Digital. O site da sua empresa pronto, profissional e sem dor de cabeça em até 5 dias úteis.",
+    "Sites, Google, redes sociais, automações e servidores para pequenos negócios e projetos independentes.",
   openGraph: {
-    title: "Priz — Sites elegantes para pequenos negócios",
+    title: "Priz: Soluções digitais claras",
     description:
-      "O site da sua empresa pronto, profissional e sem dor de cabeça em até 5 dias úteis.",
+      "Soluções digitais feitas com atenção ao seu projeto.",
     type: "website",
   },
   icons: {
@@ -40,8 +31,6 @@ export default function RootLayout({
     <html lang="pt-BR">
 <body
         suppressHydrationWarning
-        className={`${cormorant.variable} ${inter.variable}`}
-        
       >
         {children}
       </body>

@@ -1,0 +1,141 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import SiteNav from "../site-nav";
+
+export const metadata: Metadata = {
+  title: "Falar com a Priz | Contato",
+  description:
+    "Escolha o melhor canal para conversar sobre o seu projeto: WhatsApp, Instagram ou E-mail.",
+};
+
+const whatsapp =
+  "https://wa.me/554896356844?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20projeto%20com%20a%20Priz.";
+const instagram = "https://www.instagram.com/priz.oficial/";
+const email = "PrizContato@proton.me";
+
+const contactChannels = [
+  {
+    id: "whatsapp",
+    title: "WhatsApp",
+    handle: "(48) 9635-6844",
+    href: whatsapp,
+    external: true,
+    action: "Chamar no WhatsApp",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+      </svg>
+    ),
+  },
+  {
+    id: "instagram",
+    title: "Instagram",
+    handle: "@priz.oficial",
+    href: instagram,
+    external: true,
+    action: "Mandar Direct",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+      </svg>
+    ),
+  },
+  {
+    id: "email",
+    title: "E-mail",
+    handle: "PrizContato@proton.me",
+    href: `mailto:${email}`,
+    external: false,
+    action: "Enviar E-mail",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect width="20" height="16" x="2" y="4" rx="2" />
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+      </svg>
+    ),
+  },
+];
+
+export default function ContatoPage() {
+  return (
+    <div className="priz subpage">
+      <div className="grain" aria-hidden />
+
+      <SiteNav activeItem="" />
+
+      <main className="subpage-container linktree-container">
+        <div className="subpage-header linktree-header">
+          <p className="eyebrow">Falar com a Priz</p>
+          <h1 className="subpage-title">Escolha por onde prefere falar.</h1>
+          <p className="subpage-lead">
+            Pode chamar no WhatsApp, mandar DM no Instagram ou enviar um e-mail. Respondemos direto por onde for melhor pra você.
+          </p>
+        </div>
+
+        <div className="linktree-cards">
+          {contactChannels.map((c) => (
+            <a
+              key={c.id}
+              href={c.href}
+              target={c.external ? "_blank" : undefined}
+              rel={c.external ? "noreferrer" : undefined}
+              className={`linktree-card linktree-card--${c.id}`}
+            >
+              <div className="linktree-card-icon">{c.icon}</div>
+              <div className="linktree-card-content">
+                <strong className="linktree-card-title">{c.title}</strong>
+                <span className="linktree-card-handle">{c.handle}</span>
+              </div>
+              <div className="linktree-card-action">
+                <span>{c.action}</span>
+                <span className="linktree-arrow">↗</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </main>
+
+      {/* Footer padrão */}
+      <footer className="footer">
+        <div className="footer-top">
+          <Link href="/">
+            <img src="/logo.png" alt="Priz" className="footer-logo" />
+          </Link>
+        </div>
+        <div className="footer-links">
+          <div>
+            <b>Explorar</b>
+            <Link href="/sobre">Sobre a Priz</Link>
+            <Link href="/#solucoes">Serviços</Link>
+            <Link href="/#projetos">Projetos</Link>
+            <Link href="/#precos">Valores</Link>
+            <Link href="/termos">Termos & Privacidade</Link>
+          </div>
+          <div>
+            <b>Canais de Contato</b>
+            <a href={whatsapp} target="_blank" rel="noreferrer">
+              WhatsApp ↗
+            </a>
+            <a href={instagram} target="_blank" rel="noreferrer">
+              Instagram ↗
+            </a>
+            <a href={`mailto:${email}`}>{email}</a>
+            <span>Atendimento remoto para todo o Brasil</span>
+          </div>
+          <div>
+            <b>Por aqui</b>
+            <Link href="/#faq">Dúvidas frequentes</Link>
+            <Link href="/">Voltar ao início ↑</Link>
+            <span>Florianópolis · SC</span>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <span>© 2026 Priz Solutions. Todos os direitos reservados.</span>
+          <span>Presença digital & infraestrutura para projetos independentes.</span>
+        </div>
+      </footer>
+    </div>
+  );
+}
