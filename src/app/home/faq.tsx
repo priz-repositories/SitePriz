@@ -1,7 +1,3 @@
-"use client";
-
-import { useState } from "react";
-
 /* ── FAQ ──────────────────────────────────────────── */
 const faqs: [string, string][] = [
   [
@@ -27,8 +23,6 @@ const faqs: [string, string][] = [
 ];
 
 export default function Faq() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
   return (
     <section id="faq" className="faq">
       <div className="section-heading" data-reveal>
@@ -38,29 +32,17 @@ export default function Faq() {
         </h2>
       </div>
       <div className="faq-list" data-reveal>
-        {faqs.map(([question, answer], index) => {
-          const isOpen = openFaq === index;
-          return (
-            <div key={question} className={`faq-drawer-item ${isOpen ? "is-open" : ""}`}>
-              <button
-                type="button"
-                className="faq-drawer-trigger"
-                onClick={() => setOpenFaq(isOpen ? null : index)}
-                aria-expanded={isOpen}
-              >
-                <span>{question}</span>
-                <span className="faq-drawer-icon" aria-hidden>
-                  +
-                </span>
-              </button>
-              <div className="faq-drawer-body">
-                <div className="faq-drawer-inner">
-                  <p>{answer}</p>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        {faqs.map(([question, answer]) => (
+          <details key={question} name="faq" className="faq-drawer-item">
+            <summary className="faq-drawer-trigger">
+              <span>{question}</span>
+              <span className="faq-drawer-icon" aria-hidden>
+                +
+              </span>
+            </summary>
+            <p>{answer}</p>
+          </details>
+        ))}
       </div>
     </section>
   );

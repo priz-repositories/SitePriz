@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { MouseEvent } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { instagram } from "./contact";
@@ -15,7 +16,6 @@ const navItems = [
 
 export default function SiteNav() {
   const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
   /* Na home, o link ativo segue a seção visível */
@@ -34,36 +34,33 @@ export default function SiteNav() {
   }, [pathname]);
 
   const activeItem = pathname === "/sobre" ? "sobre" : activeSection;
-  const close = () => setMobileOpen(false);
+  /* Clicar num link do menu fecha o popover */
+  const closeOnLink = (e: MouseEvent<HTMLElement>) => {
+    if ((e.target as HTMLElement).closest("a")) e.currentTarget.hidePopover();
+  };
 
   return (
     <>
-      {/* ── Mobile Backdrop & Drawer ── */}
-      <div
-        className={`mobile-backdrop ${mobileOpen ? "is-open" : ""}`}
-        onClick={close}
-        aria-hidden
-      />
-      <nav className={`mobile-drawer ${mobileOpen ? "is-open" : ""}`} aria-label="Menu mobile">
-        <button className="mobile-close" onClick={close} aria-label="Fechar menu">
+      {/* ── Mobile Drawer (popover: top layer, Esc e clique fora fecham) ── */}
+      <nav id="mobile-menu" popover="auto" className="mobile-drawer" aria-label="Menu mobile" onClick={closeOnLink}>
+        <button className="mobile-close" popoverTarget="mobile-menu" popoverTargetAction="hide" aria-label="Fechar menu">
           ×
         </button>
         <div className="mobile-drawer-links">
-          <Link href="/#solucoes" onClick={close}>Serviços</Link>
-          <Link href="/#projetos" onClick={close}>Projetos</Link>
-          <Link href="/#precos" onClick={close}>Preços</Link>
-          <Link href="/#processo" onClick={close}>Processo</Link>
-          <Link href="/sobre" className={pathname === "/sobre" ? "is-active" : ""} onClick={close}>
+          <Link href="/#solucoes">Serviços</Link>
+          <Link href="/#projetos">Projetos</Link>
+          <Link href="/#precos">Preços</Link>
+          <Link href="/#processo">Processo</Link>
+          <Link href="/sobre" className={pathname === "/sobre" ? "is-active" : ""}>
             Sobre a Priz
           </Link>
-          <Link href="/contato" onClick={close}>Falar com a Priz</Link>
-          <Link href="/#faq" onClick={close}>Dúvidas</Link>
+          <Link href="/contato">Falar com a Priz</Link>
+          <Link href="/#faq">Dúvidas</Link>
         </div>
         <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 10 }}>
           <Link
             className="mobile-drawer-cta button button-light"
             href="/contato"
-            onClick={close}
             style={{ marginTop: 0 }}
           >
             Falar com a Priz <span>↗</span>
@@ -73,7 +70,6 @@ export default function SiteNav() {
             href={instagram}
             target="_blank"
             rel="noreferrer"
-            onClick={close}
             style={{ marginTop: 0 }}
           >
             Instagram <span>↗</span>
@@ -102,7 +98,7 @@ export default function SiteNav() {
           </Link>
           <button
             className="mobile-toggle"
-            onClick={() => setMobileOpen(true)}
+            popoverTarget="mobile-menu"
             aria-label="Abrir menu mobile"
           >
             <span />

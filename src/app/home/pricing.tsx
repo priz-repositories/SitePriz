@@ -237,15 +237,6 @@ export default function Pricing() {
   const [selectedPlanId, setSelectedPlanId] = useState("s1");
   const currentCategory = pricingCategories.find((c) => c.id === selectedPriceCat) ?? pricingCategories[0];
 
-  /* Trocar categoria de preço resetando o plano ativo para o primeiro da categoria */
-  const handleSwitchPriceCategory = (id: string) => {
-    setSelectedPriceCat(id);
-    const cat = pricingCategories.find((c) => c.id === id);
-    if (cat && cat.plans.length > 0) {
-      setSelectedPlanId(cat.plans[0].id);
-    }
-  };
-
   return (
     <section id="precos" className="pricing">
       <div className="section-heading" data-reveal>
@@ -261,7 +252,10 @@ export default function Pricing() {
           <button
             key={cat.id}
             className={`pricing-cat-btn ${selectedPriceCat === cat.id ? "is-active" : ""}`}
-            onClick={() => handleSwitchPriceCategory(cat.id)}
+            onClick={() => {
+              setSelectedPriceCat(cat.id);
+              setSelectedPlanId(cat.plans[0].id);
+            }}
           >
             {cat.label}
           </button>
