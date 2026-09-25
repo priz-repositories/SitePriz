@@ -6,10 +6,26 @@ import Projects from "./home/projects";
 import Pricing from "./home/pricing";
 import Process from "./home/process";
 import Faq from "./home/faq";
+import { email, instagram, team } from "./contact";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Priz",
+  url: "https://priz.com.br",
+  logo: "https://priz.com.br/priz-logo.svg",
+  email,
+  telephone: "+55 48 9635-6844",
+  sameAs: [instagram],
+  address: { "@type": "PostalAddress", addressLocality: "Florianópolis", addressRegion: "SC", addressCountry: "BR" },
+  areaServed: { "@type": "Country", name: "Brasil" },
+  employee: team.map((p) => ({ "@type": "Person", name: p.name, jobTitle: p.role, sameAs: p.linkedin })),
+};
 
 export default function Home() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <RevealObserver />
       <main id="top">
         <Hero />

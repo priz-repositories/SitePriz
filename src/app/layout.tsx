@@ -10,14 +10,19 @@ export const viewport = {
   maximumScale: 5,
 };
 
+const title = "Priz · Presença digital e infraestrutura para pequenos negócios · Florianópolis";
+const description =
+  "Sites, Google, redes sociais, automações e servidores para pequenos negócios e projetos independentes.";
+
 export const metadata: Metadata = {
-  title: "Priz: Soluções digitais claras",
-  description:
-    "Sites, Google, redes sociais, automações e servidores para pequenos negócios e projetos independentes.",
+  metadataBase: new URL("https://priz.com.br"),
+  title,
+  description,
   openGraph: {
-    title: "Priz: Soluções digitais claras",
-    description:
-      "Soluções digitais feitas com atenção ao seu projeto.",
+    title,
+    description,
+    siteName: "Priz",
+    locale: "pt_BR",
     type: "website",
   },
   icons: {
