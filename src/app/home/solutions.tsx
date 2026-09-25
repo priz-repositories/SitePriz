@@ -45,7 +45,7 @@ const solutions = [
 /* ── Visualizador Cósmico Dinâmico Refinado ─────────── */
 export function CelestialViewer({ activeType }: { activeType: string }) {
   return (
-    <div className={`celestial-viewport is-${activeType}`} aria-label="Visualizador cósmico">
+    <div className={`celestial-viewport is-${activeType}`} role="img" aria-label="Visualizador cósmico">
       {/* Luz ambiente / Brilho estelar */}
       <div className="celestial-glow" />
 

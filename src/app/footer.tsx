@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-top">
         <Link href="/">
-          <img src="/priz-logo.svg" alt="Priz" className="footer-logo" />
+          <img src="/priz-logo.svg" alt="Priz" className="footer-logo" width={579} height={299} />
         </Link>
       </div>
       <div className="footer-links">

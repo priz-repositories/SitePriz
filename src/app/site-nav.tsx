@@ -79,7 +79,7 @@ export default function SiteNav() {
 
       <header className="nav">
         <Link href="/" className="brand" aria-label="Priz Solutions">
-          <img src="/priz-logo.svg" alt="Priz" className="nav-logo" />
+          <img src="/priz-logo.svg" alt="Priz" className="nav-logo" width={579} height={299} />
         </Link>
         <nav aria-label="Navegação Principal">
           {navItems.map(({ href, id, label }) => (

@@ -36,7 +36,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="hero-copy" data-reveal>
+      <div className="hero-copy">
         <h1>
           Seu projeto precisa de um{" "}
           <span className="light-word">lugar na internet.</span>
@@ -60,7 +60,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="hero-foot" data-reveal>
+      <div className="hero-foot">
         <span>Para pequenos negócios, comunidades e projetos independentes.</span>
         <a href="#processo">
           Entenda o processo <b>↓</b>

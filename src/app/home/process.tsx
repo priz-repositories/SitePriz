@@ -187,6 +187,7 @@ export default function Process() {
                   activeProcessStep > idx ? "is-passed" : ""
                 }`}
                 onClick={() => scrollToProcessStep(idx)}
+                aria-label={stage.stageName}
               >
                 <span className="step-tab-num">{stage.step}</span>
                 <span className="step-tab-name">{stage.stageName}</span>
