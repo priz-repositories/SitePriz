@@ -127,6 +127,14 @@ export default function TermosPage() {
                 ferramentas para configuração, orientamos a troca da senha logo após a entrega.
               </span>
             </li>
+            <li>
+              <span className="check">✓</span>
+              <span>
+                <strong>Estatísticas do site:</strong> Usamos o Google Analytics para saber quantas
+                pessoas visitam o site e quais páginas acessam. Os dados são agregados e não
+                identificam você.
+              </span>
+            </li>
           </ul>
         </section>
 
