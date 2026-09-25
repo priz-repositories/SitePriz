@@ -53,7 +53,12 @@ export default function RootLayout({
         {/* Google Analytics: lazyOnload carrega quando o navegador fica ocioso, sem pesar no carregamento */}
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="lazyOnload" />
         <Script id="ga" strategy="lazyOnload">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${gaId}');`}
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${gaId}');
+document.addEventListener('click',function(e){
+  var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;
+  var h=a.href,ev=h.indexOf('wa.me/')>-1?'contato_whatsapp':h.indexOf('mailto:')===0?'contato_email':h.indexOf('instagram.com')>-1?'contato_instagram':null;
+  if(ev)gtag('event',ev,{link_url:h,page_path:location.pathname});
+});`}
         </Script>
       </body>
     </html>
