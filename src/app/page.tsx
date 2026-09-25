@@ -4,11 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import RevealObserver from "./reveal-observer";
 
-const whatsapp =
-  "https://wa.me/554896356844?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20uma%20solu%C3%A7%C3%A3o%20digital%20para%20meu%20projeto.";
-const instagram = "https://www.instagram.com/priz.oficial/";
-const email = "PrizContato@proton.me";
-
 /* ── Soluções & Cosmologias ───────────────────────── */
 const solutions = [
   {
@@ -507,35 +502,6 @@ function CosmicEvolutionArena({ stepIndex }: { stepIndex: number }) {
   );
 }
 
-/* ── Mobile Drawer ─────────────────────────────────── */
-function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
-  return (
-    <>
-      <div className={`mobile-backdrop ${open ? "is-open" : ""}`} onClick={onClose} aria-hidden />
-      <nav className={`mobile-drawer ${open ? "is-open" : ""}`} aria-label="Menu mobile">
-        <button className="mobile-close" onClick={onClose} aria-label="Fechar menu">×</button>
-        <div className="mobile-drawer-links">
-          <a href="#solucoes" onClick={onClose}>Serviços</a>
-          <a href="#projetos" onClick={onClose}>Projetos</a>
-          <a href="#precos" onClick={onClose}>Preços</a>
-          <a href="#processo" onClick={onClose}>Processo</a>
-          <Link href="/sobre" onClick={onClose}>Sobre a Priz</Link>
-          <Link href="/contato" onClick={onClose}>Falar com a Priz</Link>
-          <a href="#faq" onClick={onClose}>Dúvidas</a>
-        </div>
-        <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 10 }}>
-          <Link className="mobile-drawer-cta button button-light" href="/contato" onClick={onClose} style={{ marginTop: 0 }}>
-            Falar com a Priz <span>↗</span>
-          </Link>
-          <a className="mobile-drawer-cta button button-quiet" href={instagram} target="_blank" rel="noreferrer" onClick={onClose} style={{ marginTop: 0 }}>
-            Instagram <span>↗</span>
-          </a>
-        </div>
-      </nav>
-    </>
-  );
-}
-
 /* ── Página Principal ──────────────────────────────── */
 export default function Home() {
   const [selectedSolutionId, setSelectedSolutionId] = useState(solutions[0].id);
@@ -543,8 +509,6 @@ export default function Home() {
   const [selectedPriceCat, setSelectedPriceCat] = useState("sites");
   const [selectedPlanId, setSelectedPlanId] = useState("s1");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
 
   const processContainerRef = useRef<HTMLDivElement>(null);
   const [processProgress, setProcessProgress] = useState(0);
@@ -616,69 +580,9 @@ export default function Home() {
     window.scrollTo({ top: targetY, behavior: "smooth" });
   };
 
-  /* Monitorar seção ativa na rolagem */
-  useEffect(() => {
-    const ids = ["solucoes", "projetos", "precos", "processo", "faq", "contato"];
-    const sections = ids.map((id) => document.getElementById(id)).filter((s): s is HTMLElement => Boolean(s));
-    const onScroll = () => {
-      const current = sections.findLast((s) => s.offsetTop - window.innerHeight * 0.4 <= window.scrollY);
-      setActiveSection(current?.id ?? "");
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <div className="priz">
+    <>
       <RevealObserver />
-      <div className="grain" aria-hidden />
-      <MobileDrawer open={mobileOpen} onClose={() => setMobileOpen(false)} />
-
-      {/* ── NAV ── */}
-      <header className="nav">
-        <a className="brand" href="#top" aria-label="Priz Solutions">
-          <img src="/logo.png" alt="Priz" className="nav-logo" />
-        </a>
-        <nav aria-label="Navegação Principal">
-          {[
-            { href: "#solucoes", label: "Serviços" },
-            { href: "#projetos", label: "Projetos" },
-            { href: "#precos",   label: "Preços" },
-            { href: "#processo", label: "Processo" },
-            { href: "/sobre",    label: "Sobre" },
-          ].map(({ href, label }) =>
-            href.startsWith("#") ? (
-              <a
-                key={href}
-                href={href}
-                className={activeSection === href.slice(1) ? "nav-link is-active" : "nav-link"}
-              >
-                {label}
-              </a>
-            ) : (
-              <Link key={href} href={href} className="nav-link">
-                {label}
-              </Link>
-            )
-          )}
-        </nav>
-        <div className="nav-right">
-          <Link className="nav-cta" href="/contato">
-            Falar <span>↗</span>
-          </Link>
-          <button
-            className="mobile-toggle"
-            onClick={() => setMobileOpen(true)}
-            aria-label="Abrir menu mobile"
-          >
-            <span />
-            <span />
-            <span />
-          </button>
-        </div>
-      </header>
-
       <main id="top">
         {/* ── HERO COM PÚLSAR GIRANDO E FEIXES RELATIVÍSTICOS ── */}
         <section className="hero">
@@ -1144,47 +1048,6 @@ export default function Home() {
           </Link>
         </section>
       </main>
-
-      {/* ── FOOTER ── */}
-      <footer className="footer">
-        <div className="footer-top">
-          <img src="/logo.png" alt="Priz" className="footer-logo" />
-        </div>
-        <div className="footer-links">
-          <div>
-            <b>Explorar</b>
-            <a href="#solucoes">Serviços</a>
-            <a href="#projetos">Projetos</a>
-            <a href="#precos">Valores</a>
-            <a href="#processo">Como funciona</a>
-            <Link href="/sobre">Sobre a Priz</Link>
-            <Link href="/contato">Falar com a Priz</Link>
-            <Link href="/termos">Termos & Privacidade</Link>
-          </div>
-          <div>
-            <b>Falar com a Priz</b>
-            <Link href="/contato">Página de Contatos ↗</Link>
-            <a href={whatsapp} target="_blank" rel="noreferrer">
-              WhatsApp ↗
-            </a>
-            <a href={instagram} target="_blank" rel="noreferrer">
-              Instagram ↗
-            </a>
-            <a href={`mailto:${email}`}>{email}</a>
-            <span>Atendimento remoto para todo o Brasil</span>
-          </div>
-          <div>
-            <b>Por aqui</b>
-            <a href="#faq">Perguntas frequentes</a>
-            <a href="#top">Voltar ao topo ↑</a>
-            <span>Florianópolis · SC</span>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>© 2026 Priz Solutions. Todos os direitos reservados.</span>
-          <span>Presença digital & infraestrutura para projetos independentes.</span>
-        </div>
-      </footer>
-    </div>
+    </>
   );
 }

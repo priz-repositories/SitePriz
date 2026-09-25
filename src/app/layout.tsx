@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SiteNav from "./site-nav";
+import Footer from "./footer";
 
 export const viewport = {
   width: "device-width",
@@ -29,10 +31,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-<body
-        suppressHydrationWarning
-      >
+<body className="priz" suppressHydrationWarning>
+        <div className="grain" aria-hidden />
+        <SiteNav />
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import SiteNav from "../site-nav";
+import { email, instagram, whatsapp } from "../contact";
 
 export const metadata: Metadata = {
   title: "Falar com a Priz | Contato",
   description:
     "Escolha o melhor canal para conversar sobre o seu projeto: WhatsApp, Instagram ou E-mail.",
 };
-
-const whatsapp =
-  "https://wa.me/554896356844?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20projeto%20com%20a%20Priz.";
-const instagram = "https://www.instagram.com/priz.oficial/";
-const email = "PrizContato@proton.me";
 
 const contactChannels = [
   {
@@ -60,82 +54,36 @@ const contactChannels = [
 
 export default function ContatoPage() {
   return (
-    <div className="priz subpage">
-      <div className="grain" aria-hidden />
+    <main className="subpage-container linktree-container">
+      <div className="subpage-header linktree-header">
+        <p className="eyebrow">Falar com a Priz</p>
+        <h1 className="subpage-title">Escolha por onde prefere falar.</h1>
+        <p className="subpage-lead">
+          Pode chamar no WhatsApp, mandar DM no Instagram ou enviar um e-mail. Respondemos direto por onde for melhor pra você.
+        </p>
+      </div>
 
-      <SiteNav activeItem="" />
-
-      <main className="subpage-container linktree-container">
-        <div className="subpage-header linktree-header">
-          <p className="eyebrow">Falar com a Priz</p>
-          <h1 className="subpage-title">Escolha por onde prefere falar.</h1>
-          <p className="subpage-lead">
-            Pode chamar no WhatsApp, mandar DM no Instagram ou enviar um e-mail. Respondemos direto por onde for melhor pra você.
-          </p>
-        </div>
-
-        <div className="linktree-cards">
-          {contactChannels.map((c) => (
-            <a
-              key={c.id}
-              href={c.href}
-              target={c.external ? "_blank" : undefined}
-              rel={c.external ? "noreferrer" : undefined}
-              className={`linktree-card linktree-card--${c.id}`}
-            >
-              <div className="linktree-card-icon">{c.icon}</div>
-              <div className="linktree-card-content">
-                <strong className="linktree-card-title">{c.title}</strong>
-                <span className="linktree-card-handle">{c.handle}</span>
-              </div>
-              <div className="linktree-card-action">
-                <span>{c.action}</span>
-                <span className="linktree-arrow">↗</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </main>
-
-      {/* Footer padrão */}
-      <footer className="footer">
-        <div className="footer-top">
-          <Link href="/">
-            <img src="/logo.png" alt="Priz" className="footer-logo" />
-          </Link>
-        </div>
-        <div className="footer-links">
-          <div>
-            <b>Explorar</b>
-            <Link href="/sobre">Sobre a Priz</Link>
-            <Link href="/#solucoes">Serviços</Link>
-            <Link href="/#projetos">Projetos</Link>
-            <Link href="/#precos">Valores</Link>
-            <Link href="/termos">Termos & Privacidade</Link>
-          </div>
-          <div>
-            <b>Canais de Contato</b>
-            <a href={whatsapp} target="_blank" rel="noreferrer">
-              WhatsApp ↗
-            </a>
-            <a href={instagram} target="_blank" rel="noreferrer">
-              Instagram ↗
-            </a>
-            <a href={`mailto:${email}`}>{email}</a>
-            <span>Atendimento remoto para todo o Brasil</span>
-          </div>
-          <div>
-            <b>Por aqui</b>
-            <Link href="/#faq">Dúvidas frequentes</Link>
-            <Link href="/">Voltar ao início ↑</Link>
-            <span>Florianópolis · SC</span>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>© 2026 Priz Solutions. Todos os direitos reservados.</span>
-          <span>Presença digital & infraestrutura para projetos independentes.</span>
-        </div>
-      </footer>
-    </div>
+      <div className="linktree-cards">
+        {contactChannels.map((c) => (
+          <a
+            key={c.id}
+            href={c.href}
+            target={c.external ? "_blank" : undefined}
+            rel={c.external ? "noreferrer" : undefined}
+            className={`linktree-card linktree-card--${c.id}`}
+          >
+            <div className="linktree-card-icon">{c.icon}</div>
+            <div className="linktree-card-content">
+              <strong className="linktree-card-title">{c.title}</strong>
+              <span className="linktree-card-handle">{c.handle}</span>
+            </div>
+            <div className="linktree-card-action">
+              <span>{c.action}</span>
+              <span className="linktree-arrow">↗</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </main>
   );
 }
