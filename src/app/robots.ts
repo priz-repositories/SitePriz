@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
+import { site } from "./contact";
 
 export default function robots(): MetadataRoute.Robots {
-  return { rules: { userAgent: "*" }, sitemap: "https://priz.com.br/sitemap.xml" };
+  return { rules: { userAgent: "*" }, sitemap: `${site}/sitemap.xml` };
 }

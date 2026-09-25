@@ -6,14 +6,17 @@ import Projects from "./home/projects";
 import Pricing from "./home/pricing";
 import Process from "./home/process";
 import Faq from "./home/faq";
-import { email, instagram, team } from "./contact";
+import type { Metadata } from "next";
+import { email, instagram, site, team } from "./contact";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "Priz",
-  url: "https://priz.com.br",
-  logo: "https://priz.com.br/priz-logo.svg",
+  url: site,
+  logo: `${site}/priz-logo.svg`,
   email,
   telephone: "+55 48 9635-6844",
   sameAs: [instagram],

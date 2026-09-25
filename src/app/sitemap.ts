@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
+import { site } from "./contact";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ["", "/sobre", "/contato", "/termos"].map((path) => ({ url: `https://priz.com.br${path}` }));
+  return ["", "/sobre", "/contato", "/termos"].map((path) => ({ url: `${site}${path}` }));
 }

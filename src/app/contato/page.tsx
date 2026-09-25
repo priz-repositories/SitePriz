@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { email, instagram, whatsapp } from "../contact";
 
 export const metadata: Metadata = {
-  title: "Falar com a Priz | Contato",
+  title: "Contato",
+  alternates: { canonical: "/contato" },
   description:
     "Escolha o melhor canal para conversar sobre o seu projeto: WhatsApp, Instagram ou E-mail.",
 };

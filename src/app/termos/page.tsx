@@ -3,7 +3,8 @@ import Link from "next/link";
 import { email, instagram } from "../contact";
 
 export const metadata: Metadata = {
-  title: "Termos de Serviço & Privacidade | Priz",
+  title: "Termos de Serviço & Privacidade",
+  alternates: { canonical: "/termos" },
   description:
     "Transparência, modelo de pagamento seguro e respeito total aos seus dados e acessos.",
 };

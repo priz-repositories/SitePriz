@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SiteNav from "./site-nav";
 import Footer from "./footer";
-import { whatsapp } from "./contact";
+import { site, whatsapp } from "./contact";
 
 export const viewport = {
   width: "device-width",
@@ -15,8 +15,8 @@ const description =
   "Sites, Google, redes sociais, automações e servidores para pequenos negócios e projetos independentes.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://priz.com.br"),
-  title,
+  metadataBase: new URL(site),
+  title: { default: title, template: "%s | Priz" },
   description,
   openGraph: {
     title,

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { team } from "../contact";
 
 export const metadata: Metadata = {
-  title: "Sobre a Priz | Quem Somos",
+  title: "Quem somos",
+  alternates: { canonical: "/sobre" },
   description:
     "Estúdio independente de desenvolvimento e presença digital em Florianópolis. Soluções diretas, contato sem intermediários e transparência total.",
 };
