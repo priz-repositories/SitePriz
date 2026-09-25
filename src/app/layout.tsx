@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [{ url: "/priz-favicon.svg", type: "image/svg+xml" }, { url: "/favicon.ico" }],
   },
 };
 
