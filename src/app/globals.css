@@ -2373,6 +2373,25 @@ section {
   font-weight: 700;
 }
 
+/* ─── WhatsApp fixo (só no celular) ─────────────────── */
+.whatsapp-float { display: none; }
+@media (max-width: 860px) {
+  a.whatsapp-float {
+    position: fixed;
+    right: 18px;
+    bottom: max(18px, env(safe-area-inset-bottom));
+    z-index: 30;
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    box-shadow: 0 8px 24px rgba(0,0,0,.45);
+  }
+}
+
 /* ─── reveal animation ──────────────────────────────────── */
 [data-reveal] {
   opacity: 0;
@@ -3074,6 +3093,9 @@ section {
 .subpage-list li strong {
   color: var(--ink);
 }
+
+.subpage-list a { color: var(--ink); transition: color .2s; }
+.subpage-list a:hover { color: var(--muted); }
 
 .subpage-list .check {
   color: var(--hi);

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { team } from "../contact";
 
 export const metadata: Metadata = {
   title: "Sobre a Priz | Quem Somos",
@@ -27,6 +28,23 @@ export default function SobrePage() {
             sozinho na hora de apontar um domínio ou resolver um erro técnico.
             A Priz trabalha de forma independente, com preço justo e sem enrolar.
           </p>
+        </section>
+
+        <section className="subpage-section">
+          <h2>Quem faz a Priz</h2>
+          <ul className="subpage-list">
+            {team.map((person, i) => (
+              <li key={person.name}>
+                <span className="check">0{i + 1}.</span>
+                <span>
+                  <strong>{person.name}</strong>, {person.role.toLowerCase()}.{" "}
+                  <a href={person.linkedin} target="_blank" rel="noreferrer">
+                    LinkedIn ↗
+                  </a>
+                </span>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section className="subpage-section">
