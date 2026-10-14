@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { onTabKeyDown } from "./tab-keys";
 import Link from "next/link";
 
 /* ── Soluções & Cosmologias ───────────────────────── */
@@ -144,7 +145,7 @@ export default function Solutions() {
           Escolha o que precisa <em>resolver agora.</em>
         </h2>
       </div>
-      <div className="solution-explorer" data-reveal>
+      <div className="solution-explorer" data-reveal data-anim>
         {/* Lista tipográfica limpa */}
         <div className="solution-list" role="tablist" aria-label="Soluções da Priz">
           {solutions.map((item) => (
@@ -152,10 +153,12 @@ export default function Solutions() {
               key={item.id}
               role="tab"
               aria-selected={item.id === selectedSolutionId}
+              aria-controls="solution-panel"
+              tabIndex={item.id === selectedSolutionId ? 0 : -1}
               className={item.id === selectedSolutionId ? "is-active" : ""}
-              onMouseEnter={() => setSelectedSolutionId(item.id)}
               onFocus={() => setSelectedSolutionId(item.id)}
               onClick={() => setSelectedSolutionId(item.id)}
+              onKeyDown={onTabKeyDown}
             >
               <span className="solution-dot" aria-hidden />
               <span className="solution-name">{item.title}</span>
@@ -164,8 +167,8 @@ export default function Solutions() {
         </div>
 
         {/* Estágio com visualizador cósmico que se transforma organicamente */}
-        <article className="solution-stage">
-          <div className="stage-content">
+        <article className="solution-stage" id="solution-panel" role="tabpanel">
+          <div className="stage-content swap-in" key={activeSolution.id}>
             <span className="stage-tag">{activeSolution.tag}</span>
             <h3>{activeSolution.title}</h3>
             <p>{activeSolution.text}</p>

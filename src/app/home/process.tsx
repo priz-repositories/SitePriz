@@ -57,7 +57,7 @@ const processStages = [
 
 function CosmicEvolutionArena({ stepIndex }: { stepIndex: number }) {
   return (
-    <div className={`process-cosmic-arena stage--${stepIndex}`} aria-hidden>
+    <div className={`process-cosmic-arena stage--${stepIndex}`} aria-hidden data-anim>
       {/* Retículo e eixos astronômicos */}
       <div className="arena-reticle">
         <div className="reticle-ring" />
@@ -103,8 +103,14 @@ function CosmicEvolutionArena({ stepIndex }: { stepIndex: number }) {
 
 export default function Process() {
   const processContainerRef = useRef<HTMLDivElement>(null);
-  const [processProgress, setProcessProgress] = useState(0);
+  const progressFillRef = useRef<HTMLDivElement>(null);
   const [activeProcessStep, setActiveProcessStep] = useState(0);
+  /* direção da troca: o card novo entra vindo do lado para onde a rolagem vai */
+  const prevStepRef = useRef(0);
+  const swapY = activeProcessStep >= prevStepRef.current ? "10px" : "-10px";
+  useEffect(() => {
+    prevStepRef.current = activeProcessStep;
+  }, [activeProcessStep]);
 
   /* Scroll lock / Scrollytelling para o ciclo de desenvolvimento */
   useEffect(() => {
@@ -121,7 +127,7 @@ export default function Process() {
         if (total > 0) {
           const scrolled = -rect.top;
           const progress = Math.max(0, Math.min(1, scrolled / total));
-          setProcessProgress(progress);
+          if (progressFillRef.current) progressFillRef.current.style.width = `${Math.round(progress * 100)}%`;
 
           let step = 0;
           if (progress >= 0.75) {
@@ -173,10 +179,7 @@ export default function Process() {
 
           {/* Barra de Progresso Interativa com 4 Estágios */}
           <div className="process-progress-bar" role="tablist" aria-label="Etapas do ciclo estelar">
-            <div
-              className="process-progress-fill"
-              style={{ width: `${Math.round(processProgress * 100)}%` }}
-            />
+            <div className="process-progress-fill" ref={progressFillRef} />
             {processStages.map((stage, idx) => (
               <button
                 key={stage.step}
@@ -204,7 +207,11 @@ export default function Process() {
           </div>
 
           {/* Coluna Conteúdo: Informações Detalhadas com Transição Fluida */}
-          <div className="process-details-col">
+          <div
+            className="process-details-col swap-in"
+            key={activeProcessStep}
+            style={{ "--swap-y": swapY } as React.CSSProperties}
+          >
             <h3 className="process-card-title">{processStages[activeProcessStep].title}</h3>
 
             <p className="process-card-text">{processStages[activeProcessStep].text}</p>
@@ -219,6 +226,27 @@ export default function Process() {
             </ul>
           </div>
         </div>
+      </div>
+
+      {/* Celular: as 4 etapas empilhadas, sem prender a rolagem */}
+      <div className="process-mobile-list">
+        {processStages.map((stage) => (
+          <article key={stage.step}>
+            <p className="eyebrow">
+              {stage.step} · {stage.stageName}
+            </p>
+            <h3>{stage.title}</h3>
+            <p>{stage.text}</p>
+            <ul>
+              {stage.highlights.map((item) => (
+                <li key={item}>
+                  <span>✓</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
       </div>
     </section>
   );

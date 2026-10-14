@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { email, instagram, whatsapp } from "./contact";
+import { CookiePrefsButton } from "./cookie-consent";
 
 export default function Footer() {
   return (
@@ -18,7 +19,9 @@ export default function Footer() {
           <Link href="/#projetos">Projetos</Link>
           <Link href="/#precos">Valores</Link>
           <Link href="/#processo">Como funciona</Link>
-          <Link href="/termos">Termos & Privacidade</Link>
+          <Link href="/termos">Termos de serviço</Link>
+          <Link href="/privacidade">Privacidade & cookies</Link>
+          <CookiePrefsButton className="footer-link-button" />
         </div>
         <div>
           <b>Falar com a Priz</b>

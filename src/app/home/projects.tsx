@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { onTabKeyDown } from "./tab-keys";
 
 /* ── Projetos ─────────────────────────────────────── */
 const projects = [
@@ -22,6 +23,8 @@ const projects = [
 
 export default function Projects() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  /* a prévia ao vivo só carrega quando a pessoa pede */
+  const [livePreview, setLivePreview] = useState(false);
   const activeProject = projects[activeProjectIndex] ?? projects[0];
 
   return (
@@ -34,7 +37,7 @@ export default function Projects() {
           </h2>
         </div>
         <p>
-          Cada projeto nasceu de uma demanda real. Clique na prévia para interagir com o site direto na internet.
+          Cada projeto nasceu de uma demanda real. Veja a prévia ao vivo aqui ou abra o site numa nova aba.
         </p>
       </div>
 
@@ -49,8 +52,14 @@ export default function Projects() {
                 role="tab"
                 type="button"
                 aria-selected={isActive}
+                aria-controls="project-panel"
+                tabIndex={isActive ? 0 : -1}
                 className={`project-tab-btn ${isActive ? "is-active" : ""}`}
-                onClick={() => setActiveProjectIndex(idx)}
+                onClick={() => {
+                  setActiveProjectIndex(idx);
+                  setLivePreview(false);
+                }}
+                onKeyDown={onTabKeyDown}
               >
                 <span className="project-tab-num">0{idx + 1}.</span>
                 <strong className="project-tab-name">{project.name}</strong>
@@ -61,24 +70,19 @@ export default function Projects() {
         </div>
 
         {/* Prévia direta do site (limpa, sem safari/firulas) */}
-        <div className="project-stage-view">
-          <a
-            className="project-preview-frame"
-            href={activeProject.url}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`Abrir ${activeProject.name}`}
-          >
-            <iframe
-              key={activeProject.url}
-              src={activeProject.url}
-              title={`Prévia do site ${activeProject.name}`}
-              loading="lazy"
-            />
-            <div className="preview-cover">
-              <span>Abrir site oficial ↗</span>
-            </div>
-          </a>
+        <div className="project-stage-view swap-in" id="project-panel" role="tabpanel" key={activeProject.url}>
+          <div className="project-preview-frame">
+            {livePreview ? (
+              <iframe src={activeProject.url} title={`Prévia do site ${activeProject.name}`} />
+            ) : (
+              <div className="preview-placeholder">
+                <span>{activeProject.cleanUrl}</span>
+                <button type="button" className="button button-quiet" onClick={() => setLivePreview(true)}>
+                  Ver prévia ao vivo <span>↓</span>
+                </button>
+              </div>
+            )}
+          </div>
 
           {/* Informações limpas abaixo da prévia */}
           <div className="project-stage-info">

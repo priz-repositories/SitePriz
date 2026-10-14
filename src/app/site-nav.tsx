@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import type { MouseEvent } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { MouseEvent, PointerEvent } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { instagram } from "./contact";
@@ -14,7 +14,61 @@ const navItems = [
   { href: "/sobre",     id: "sobre",    label: "Sobre" },
 ];
 
+/* Projeção de momento (Apple, Designing Fluid Interfaces): onde o gesto pararia sozinho */
+const project = (velocity: number, decelerationRate = 0.998) =>
+  ((velocity / 1000) * decelerationRate) / (1 - decelerationRate);
+
+/* Resistência progressiva além do limite, em vez de parada seca */
+const rubberband = (overshoot: number, dimension: number, constant = 0.55) =>
+  (overshoot * dimension * constant) / (dimension + constant * Math.abs(overshoot));
+
+/* Arrastar o drawer para a direita fecha; acompanha o dedo 1:1 */
+function useDrawerSwipe() {
+  const drag = useRef<{ x: number; y: number; axis?: "x" | "y"; samples: { x: number; t: number }[] } | null>(null);
+
+  const onPointerDown = (e: PointerEvent<HTMLElement>) => {
+    if (e.pointerType === "mouse") return;
+    drag.current = { x: e.clientX, y: e.clientY, samples: [{ x: e.clientX, t: e.timeStamp }] };
+  };
+
+  const onPointerMove = (e: PointerEvent<HTMLElement>) => {
+    const d = drag.current;
+    if (!d) return;
+    const dx = e.clientX - d.x;
+    const dy = e.clientY - d.y;
+    if (!d.axis) {
+      if (Math.hypot(dx, dy) < 10) return; // histerese: só decide a direção depois de 10px
+      d.axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+      if (d.axis === "y") return void (drag.current = null); // é rolagem da lista
+      e.currentTarget.setPointerCapture(e.pointerId);
+      e.currentTarget.style.transition = "none";
+    }
+    d.samples = [...d.samples.slice(-4), { x: e.clientX, t: e.timeStamp }];
+    const offset = dx >= 0 ? dx : rubberband(dx, e.currentTarget.offsetWidth);
+    e.currentTarget.style.transform = `translateX(${offset}px)`;
+  };
+
+  const onPointerEnd = (e: PointerEvent<HTMLElement>) => {
+    const d = drag.current;
+    drag.current = null;
+    if (!d?.axis) return;
+    const el = e.currentTarget;
+    const first = d.samples[0];
+    const last = d.samples.at(-1)!;
+    const velocity = ((last.x - first.x) / Math.max(1, last.t - first.t)) * 1000; // px/s
+    const dx = e.clientX - d.x;
+    const shouldClose = dx + project(velocity) > el.offsetWidth / 2;
+    // a transição CSS parte do valor atual na tela, sem salto
+    el.style.transition = "";
+    el.style.transform = "";
+    if (shouldClose) el.hidePopover();
+  };
+
+  return { onPointerDown, onPointerMove, onPointerUp: onPointerEnd, onPointerCancel: onPointerEnd };
+}
+
 export default function SiteNav() {
+  const drawerSwipe = useDrawerSwipe();
   const pathname = usePathname();
   const [activeSection, setActiveSection] = useState("");
 
@@ -42,7 +96,7 @@ export default function SiteNav() {
   return (
     <>
       {/* ── Mobile Drawer (popover: top layer, Esc e clique fora fecham) ── */}
-      <nav id="mobile-menu" popover="auto" className="mobile-drawer" aria-label="Menu mobile" onClick={closeOnLink}>
+      <nav id="mobile-menu" popover="auto" className="mobile-drawer" aria-label="Menu mobile" onClick={closeOnLink} {...drawerSwipe}>
         <button className="mobile-close" popoverTarget="mobile-menu" popoverTargetAction="hide" aria-label="Fechar menu">
           ×
         </button>

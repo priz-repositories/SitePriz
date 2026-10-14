@@ -3,14 +3,8 @@ import { useEffect } from "react";
 
 export default function RevealObserver() {
   useEffect(() => {
-    // respect reduced-motion
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    // --- simple reveals ---
-    const reveals = document.querySelectorAll<HTMLElement>("[data-reveal]");
-    if (reduced) {
-      reveals.forEach((el) => el.classList.add("is-in"));
-    } else {
+    // reduced-motion: o CSS troca o slide por um fade curto, sem deslocamento
+    const reveal = (selector: string, threshold: number) => {
       const observer = new IntersectionObserver(
         (entries) =>
           entries.forEach((entry) => {
@@ -19,30 +13,26 @@ export default function RevealObserver() {
               observer.unobserve(entry.target);
             }
           }),
-        { threshold: 0.12 }
+        { threshold }
       );
-      reveals.forEach((el) => observer.observe(el));
+      document.querySelectorAll<HTMLElement>(selector).forEach((el) => observer.observe(el));
+      return observer;
+    };
 
-      // --- stagger reveals ---
-      const staggerObserver = new IntersectionObserver(
-        (entries) =>
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-in");
-              staggerObserver.unobserve(entry.target);
-            }
-          }),
-        { threshold: 0.08 }
-      );
-      document
-        .querySelectorAll<HTMLElement>("[data-reveal-stagger]")
-        .forEach((el) => staggerObserver.observe(el));
+    const simple = reveal("[data-reveal]", 0.12);
+    const stagger = reveal("[data-reveal-stagger]", 0.08);
 
-      return () => {
-        observer.disconnect();
-        staggerObserver.disconnect();
-      };
-    }
+    // animações decorativas ([data-anim]) pausam quando saem da tela
+    const pauser = new IntersectionObserver((entries) =>
+      entries.forEach((entry) => entry.target.classList.toggle("is-paused", !entry.isIntersecting))
+    );
+    document.querySelectorAll("[data-anim]").forEach((el) => pauser.observe(el));
+
+    return () => {
+      simple.disconnect();
+      stagger.disconnect();
+      pauser.disconnect();
+    };
   }, []);
   return null;
 }

@@ -130,9 +130,13 @@ export default function TermosPage() {
             <li>
               <span className="check">✓</span>
               <span>
-                <strong>Estatísticas do site:</strong> Usamos o Google Analytics para saber quantas
-                pessoas visitam o site e quais páginas acessam. Os dados são agregados e não
-                identificam você.
+                <strong>Estatísticas do site:</strong> Com o seu consentimento, usamos o Google
+                Analytics para saber quantas pessoas visitam o site e quais páginas acessam. Detalhes
+                na{" "}
+                <Link href="/privacidade" style={{ color: "var(--hi)" }}>
+                  Política de Privacidade e Cookies
+                </Link>
+                .
               </span>
             </li>
           </ul>

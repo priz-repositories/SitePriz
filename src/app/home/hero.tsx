@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section className="hero">
       {/* Cenário Cósmico de Fundo com Púlsar Relativístico em 3D */}
-      <div className="hero-cosmos" aria-hidden>
+      <div className="hero-cosmos" aria-hidden data-anim>
         <div className="hero-nebula-glow" />
 
         {/* O Púlsar de Fundo com Feixes de Radiação em Rotação Contínua */}

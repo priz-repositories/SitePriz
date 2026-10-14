@@ -251,6 +251,8 @@ export default function Pricing() {
         {pricingCategories.map((cat) => (
           <button
             key={cat.id}
+            type="button"
+            aria-pressed={selectedPriceCat === cat.id}
             className={`pricing-cat-btn ${selectedPriceCat === cat.id ? "is-active" : ""}`}
             onClick={() => {
               setSelectedPriceCat(cat.id);
@@ -263,60 +265,62 @@ export default function Pricing() {
       </div>
 
       {/* Lista de planos expansíveis com efeito gaveta */}
-      <div className="pricing-drawers" data-reveal>
-        {currentCategory.plans.map((item) => {
-          const isOpen = selectedPlanId === item.id;
-          return (
-            <div
-              key={item.id}
-              className={`plan-drawer-item ${isOpen ? "is-open" : ""}`}
-            >
-              <button
-                type="button"
-                className="plan-drawer-header"
-                onClick={() => setSelectedPlanId(isOpen ? "" : item.id)}
-                aria-expanded={isOpen}
+      <div data-reveal>
+        <div className="pricing-drawers swap-in" key={selectedPriceCat}>
+          {currentCategory.plans.map((item) => {
+            const isOpen = selectedPlanId === item.id;
+            return (
+              <div
+                key={item.id}
+                className={`plan-drawer-item ${isOpen ? "is-open" : ""}`}
               >
-                <div className="plan-drawer-meta">
-                  <span className="plan-drawer-eyebrow">{item.eyebrow}</span>
-                  <strong className="plan-drawer-name">{item.name}</strong>
-                </div>
-                <div className="plan-drawer-price-col">
-                  <span className="plan-drawer-price">{item.price}</span>
-                  <span className="plan-drawer-icon" aria-hidden>
-                    +
-                  </span>
-                </div>
-              </button>
+                <button
+                  type="button"
+                  className="plan-drawer-header"
+                  onClick={() => setSelectedPlanId(isOpen ? "" : item.id)}
+                  aria-expanded={isOpen}
+                >
+                  <div className="plan-drawer-meta">
+                    <span className="plan-drawer-eyebrow">{item.eyebrow}</span>
+                    <strong className="plan-drawer-name">{item.name}</strong>
+                  </div>
+                  <div className="plan-drawer-price-col">
+                    <span className="plan-drawer-price">{item.price}</span>
+                    <span className="plan-drawer-icon" aria-hidden>
+                      +
+                    </span>
+                  </div>
+                </button>
 
-              <div className="plan-drawer-body">
-                <div className="plan-drawer-inner">
-                  <div className="plan-drawer-content">
-                    <div className="plan-drawer-details">
-                      <p className="plan-drawer-note">{item.note}</p>
-                      <p className="plan-drawer-deadline">
-                        Prazo estimado: {item.deadline}
-                      </p>
-                      <ul className="plan-drawer-items">
-                        {item.items.map((it) => (
-                          <li key={it}>
-                            <span>✓</span> {it}
-                          </li>
-                        ))}
-                      </ul>
+                <div className="plan-drawer-body">
+                  <div className="plan-drawer-inner">
+                    <div className="plan-drawer-content">
+                      <div className="plan-drawer-details">
+                        <p className="plan-drawer-note">{item.note}</p>
+                        <p className="plan-drawer-deadline">
+                          Prazo estimado: {item.deadline}
+                        </p>
+                        <ul className="plan-drawer-items">
+                          {item.items.map((it) => (
+                            <li key={it}>
+                              <span>✓</span> {it}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <Link
+                        className="button button-light plan-drawer-cta"
+                        href="/contato"
+                      >
+                        {item.cta} <span>↗</span>
+                      </Link>
                     </div>
-                    <Link
-                      className="button button-light plan-drawer-cta"
-                      href="/contato"
-                    >
-                      {item.cta} <span>↗</span>
-                    </Link>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
       <p className="pricing-disclaimer" data-reveal>
         Os valores acima são referências para início de conversa. O orçamento final depende do
