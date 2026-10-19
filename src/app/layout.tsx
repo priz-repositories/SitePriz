@@ -1,9 +1,19 @@
 import type { Metadata } from "next";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import SiteNav from "./site-nav";
 import Footer from "./footer";
 import CookieConsent from "./cookie-consent";
 import { site, whatsapp } from "./contact";
+
+/* Fontes servidas pelo próprio site (next/font); o globals.css usa as variáveis em --display e --sans */
+const display = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-display",
+});
+const sans = Inter({ subsets: ["latin"], display: "swap", variable: "--font-sans" });
 
 export const viewport = {
   width: "device-width",
@@ -37,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={`${display.variable} ${sans.variable}`} data-scroll-behavior="smooth">
       <body className="priz" suppressHydrationWarning>
         <div className="grain" aria-hidden />
         <SiteNav />

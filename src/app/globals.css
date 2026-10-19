@@ -5,12 +5,12 @@
   --bg:      #0a0a0a;
   --ink:     #f0f0ea;
   --muted:   #888882;
-  --dim:     #7d7d76;
+  --dim:     #82827b; /* 4.7:1 sobre #141414 (AA) */
   --line:    rgba(240,240,234,.11);
   --soft:    #141414;
   --hi:      #f0f0ea;
-  --display: "Cormorant Garamond", Georgia, serif;
-  --sans:    "Inter", Arial, sans-serif;
+  --display: var(--font-display), Georgia, serif;
+  --sans:    var(--font-sans), Arial, sans-serif;
 }
 
 /* ─── reset / base ────────────────────────────────────── */
@@ -48,6 +48,7 @@ h1, h2, h3, h4, p { margin-top: 0; }
 h1, h2, h3 {
   font-family: var(--display);
   font-optical-sizing: auto;
+  text-wrap: balance;
 }
 
 /* tracking por tamanho: quanto maior o título, mais apertado */
@@ -56,7 +57,7 @@ h2 { font-size: clamp(2.5rem, 5vw,   4.5rem);  line-height: .94; font-weight: 60
 h3 { font-size: 1.875rem; line-height: 1; font-weight: 600; letter-spacing: -.02em; }
 
 em  { color: var(--hi); font-style: normal; font-weight: 500; }
-p   { color: var(--muted); font-size: 0.9375rem; line-height: 1.7; }
+p   { color: var(--muted); font-size: 0.9375rem; line-height: 1.7; text-wrap: pretty; }
 
 /* eyebrow label */
 .eyebrow {
@@ -372,7 +373,7 @@ section {
   border-bottom: 1px solid var(--line);
   background: var(--bg) !important;
   color: var(--muted);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
 }
 .hero-foot a { color: var(--ink); font-weight: 700; }
 .hero-foot b { color: var(--hi); padding-left: 8px; font-size: 0.9375rem; }
@@ -449,7 +450,7 @@ section {
 .scenario-tab:last-child { border-bottom: none; }
 
 .scenario-badge {
-  font-size: 0.5625rem;
+  font-size: 0.6875rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .12em;
@@ -488,7 +489,7 @@ section {
 }
 
 .scenario-tag {
-  font-size: 0.5625rem;
+  font-size: 0.6875rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .14em;
@@ -512,7 +513,7 @@ section {
 }
 .scenario-story h4,
 .scenario-cure h4 {
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .1em;
@@ -621,7 +622,7 @@ section {
 
 .stage-tag {
   color: var(--dim);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .14em;
@@ -644,7 +645,7 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .12em;
@@ -1425,7 +1426,7 @@ section {
 }
 
 .project-tab-kind {
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   color: var(--dim);
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -1495,7 +1496,7 @@ section {
 }
 
 .project-stage-kind {
-  font-size: 0.5625rem;
+  font-size: 0.6875rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .12em;
@@ -1543,7 +1544,7 @@ section {
   border: none;
   border-right: 1px solid var(--line);
   color: var(--muted);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .12em;
@@ -1589,7 +1590,7 @@ section {
 }
 
 .plan-drawer-eyebrow {
-  font-size: 0.59375rem;
+  font-size: 0.6875rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .12em;
@@ -1669,13 +1670,13 @@ section {
 }
 
 .plan-drawer-note {
-  font-size: 0.71875rem;
+  font-size: 0.8125rem;
   color: var(--muted);
   margin: 0 0 6px;
 }
 
 .plan-drawer-deadline {
-  font-size: 0.71875rem;
+  font-size: 0.8125rem;
   color: var(--dim);
   display: flex;
   align-items: center;
@@ -1801,7 +1802,7 @@ section {
   color: var(--muted);
 }
 .step-tab-num {
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   font-weight: 800;
   letter-spacing: .12em;
   font-family: var(--sans);
@@ -2046,7 +2047,7 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .14em;
@@ -2234,7 +2235,7 @@ section {
   padding-bottom: 70px;
 }
 .footer-links div  { display: flex; flex-direction: column; gap: 10px; }
-.footer-links b    { color: var(--dim); font-size: 0.5625rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 5px; }
+.footer-links b    { color: var(--dim); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 5px; }
 .footer-links a,
 .footer-links span { color: var(--ink); font-size: 0.75rem; }
 .footer-links a { transition: color .2s; }
@@ -2247,7 +2248,7 @@ section {
   display: flex;
   justify-content: space-between;
   color: var(--muted);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
 }
 
 /* ─── mobile drawer ────────────────────────────────── */
@@ -2334,6 +2335,8 @@ section {
 
 /* ─── WhatsApp fixo (só no celular) ─────────────────── */
 .whatsapp-float { display: none; }
+/* some enquanto o aviso de cookies está aberto, para não cobrir o "Aceitar" */
+body:has(.cookie-banner) .whatsapp-float { display: none; }
 @media (max-width: 860px) {
   a.whatsapp-float {
     position: fixed;
@@ -2589,7 +2592,7 @@ a, button { touch-action: manipulation; }
     flex-direction: column;
     gap: 10px;
     text-align: center;
-    font-size: 0.6875rem;
+    font-size: 0.8125rem;
   }
   .hero-foot a { text-align: center; }
 
@@ -2680,7 +2683,7 @@ a, button { touch-action: manipulation; }
     max-width: 80%;
   }
   .sol-drawer-content .stage-tag {
-    font-size: 0.53125rem;
+    font-size: 0.6875rem;
     letter-spacing: .12em;
     margin-bottom: 0;
   }
@@ -2691,7 +2694,7 @@ a, button { touch-action: manipulation; }
     margin: 0;
   }
   .sol-drawer-content .cosmic-caption {
-    font-size: 0.5625rem;
+    font-size: 0.6875rem;
     margin-bottom: 4px;
     padding: 4px 10px;
     gap: 6px;
@@ -2741,7 +2744,7 @@ a, button { touch-action: manipulation; }
     flex-direction: column;
     align-items: flex-start;
   }
-  .project-tab-num { font-size: 0.59375rem; }
+  .project-tab-num { font-size: 0.6875rem; }
   .project-tab-name { font-size: 0.9375rem; }
   .project-tab-kind { display: none; }
 
@@ -2829,7 +2832,7 @@ a, button { touch-action: manipulation; }
     box-shadow: 0 0 8px rgba(255,255,255,.6);
   }
   .plan-drawer-header { padding: 14px 14px; }
-  .plan-drawer-eyebrow { font-size: 0.53125rem; }
+  .plan-drawer-eyebrow { font-size: 0.6875rem; }
   .plan-drawer-name { font-size: 1.0625rem; }
   .plan-drawer-price { font-size: 1.1875rem; }
   .plan-drawer-content {
@@ -2844,7 +2847,7 @@ a, button { touch-action: manipulation; }
     margin: 12px 0;
   }
   .plan-drawer-items li { font-size: 0.78125rem; }
-  .plan-drawer-note, .plan-drawer-deadline { font-size: 0.6875rem; }
+  .plan-drawer-note, .plan-drawer-deadline { font-size: 0.8125rem; }
   .plan-drawer-cta {
     width: 100%;
     justify-content: center;
@@ -2852,7 +2855,7 @@ a, button { touch-action: manipulation; }
     font-size: 0.75rem;
   }
   .pricing-disclaimer {
-    font-size: 0.71875rem;
+    font-size: 0.8125rem;
     line-height: 1.5;
     margin-top: 24px;
   }
@@ -2925,6 +2928,9 @@ a, button { touch-action: manipulation; }
   gap: 36px;
 }
 
+/* a regra global de section (1180px) não vale dentro da coluna das subpáginas */
+.subpage-section { width: auto; }
+
 .subpage-section h2 {
   font-family: var(--sans);
   font-size: 1.1875rem;
@@ -2939,6 +2945,7 @@ a, button { touch-action: manipulation; }
   line-height: 1.75;
   color: var(--muted);
   margin: 0 0 14px;
+  max-width: 68ch;
 }
 
 .subpage-card {
@@ -2962,6 +2969,7 @@ a, button { touch-action: manipulation; }
   line-height: 1.65;
   color: var(--muted);
   margin: 0;
+  max-width: 68ch;
 }
 
 .subpage-list {
